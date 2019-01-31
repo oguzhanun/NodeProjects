@@ -4,6 +4,33 @@ const fs = require('fs');
 
 const app = express();
 
+// -*-*-*-*-*-*-*-*-*-*-*     HEROKU DA DEPLOY İÇİN     *-*-*-*-*-*-*-*-*-*
+// ÖNCELİKLE HEROKUNUN TOOLBELT İ DOWNLOAD EDİLİP YÜKLENMELİ...
+// sonrasında ise terminalden 
+// heroku --help
+// bu komut ile ilk CLI yükleniyor
+// sonrasında
+// heroku login
+// sonrasında
+// heroku keys:add (ssh anahtarı varsa)
+// heroku keys remove ile anahtar kaldırılıyor
+// sonrasında
+// ssh -v git@heroku.com (heroku nun serverları ile iletişim için)
+// sonrasında
+// uygulamada kullanılan port un heroku tarafından seçilmesini sağla
+// sonrasında
+// package.json da script kısmında "start":"node server.js" yazmalıyız.
+// sonrasında
+// heroku remote
+// bu komut ile herokuda içinde bulunduğumuz dosya için bir remote açtık
+// sonrasında
+// git push heroku
+// sonrasında
+// heroku open 
+// VE SONUNDA UYGULAMAMIZ DEPLOY EDİLMİŞ DURUMDA KARŞIMIZDADIR.
+
+
+// local olarak 8000'de heroku çalıştırırken remote cihazın uygun portunda uygulamanın çalışabilmesi için gerekli...
 const port = process.env.PORT || 8000;
 
 hbs.registerPartials(__dirname + "/views/partials");
@@ -67,6 +94,12 @@ app.get('/about', (req, res) => {
     });
 })
 
+app.get('/projects', (req, res)=>{
+    res.render('projects.hbs', {
+        pageTitle:'Projects',
+        message:'Welcome to our projects page...'
+    });
+});
 
 app.get('/bad', (req, res) => {
     res.send({
